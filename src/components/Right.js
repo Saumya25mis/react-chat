@@ -1,6 +1,9 @@
 import React,{Component}  from'react'
+import {auth} from "../helpers/firebase"
+import {db} from "../helpers/firebase"
 
-class Right extends React.Component {
+
+ /*class chat extends Component {
     constructor(props) {
       super(props);
       this.state = { items: [], text: '' };
@@ -55,7 +58,97 @@ class Right extends React.Component {
           </p>
       );
     }
-  }
-  
+  } 
 
-export default Right
+
+  */
+  
+ class Chat extends Component {
+
+  constructor(props){
+    super(props);
+    this.state={
+      user:auth().currentUser,
+      chats:[],
+      content:'',
+      readError: null,
+      loadingChats:false,
+      writeError:null
+    };
+
+  }
+
+
+
+
+async componentDidMount(){
+  this.setState({readError:null})
+  try{
+    db.ref("chats").on("value",snapshot =>{
+      let chats=[];
+      snapshot.forEach((snap)=>{
+        chats.push(snap.val());
+      })
+      this.setState({chats})
+    })
+  }catch(error){
+    this.setState({readError:error.message})
+  }
+  this.scrollToBottom();
+}
+
+scrollToBottom = () => {
+  this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+}
+
+
+componentDidUpdate() {
+  this.scrollToBottom();
+}
+
+
+
+/* return <p  className="text-white" style={{border:1+'px'}} key={chat.timestamp}>: {chat.content}</p> */
+
+render() {
+  return (
+    
+    <div>
+
+      <div className="card-body" id="chat" style={{border:1 + 'px'}}>
+        {this.state.chats.map(chat => (<div key={chat.timestamp}>
+        {this.state.user.uid === chat.uid  ?(
+         
+            <li className=" self" style={{listStyleType:"none",overflow:'hidden',float:'right',marginLeft: 2 +'px',
+            backgroundColor:"whitesmoke",margin:2 + "em",padding:13+'px',width:'max-content',borderBottomLeftRadius:11+'px',
+            borderBottomRightRadius:11+'px',borderTopLeftRadius:11+'px'}}>
+
+                    <div className="message text-dark">{chat.content} </div>
+            </li>
+            
+          ):(
+           
+            <li className="other" style={{listStyleType:"none",overflow:'hidden',float:'left',marginLeft: 2 +'px',
+            backgroundColor:"blanchedalmond",margin:2 + "em",padding:13+'px',width:'max-content',borderBottomLeftRadius:11+'px',
+            borderBottomRightRadius:11+'px',borderTopRightRadius:11+'px'}}>
+          
+                     <div className="message text-dark">{chat.content}</div>
+            
+            </li>
+            
+          )}
+        </div>
+        ))}
+        </div>
+        <p style={{ float:"left", clear: "both",position:'sticky',bottom:0 }} ref={(el) => { this.messagesEnd = el; }}>
+        </p>
+
+        </div>
+     
+        
+  )
+}
+}
+export default Chat;
+
+

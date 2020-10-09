@@ -114,32 +114,28 @@ render() {
   return (
     
     <div>
-
-      <div className="card-body" id="chat" style={{border:1 + 'px'}}>
         {this.state.chats.map(chat => (<div key={chat.timestamp}>
         {this.state.user.uid === chat.uid  ?(
-         
-            <li className=" self" style={{listStyleType:"none",overflow:'hidden',float:'right',marginLeft: 2 +'px',
-            backgroundColor:"whitesmoke",margin:2 + "em",padding:13+'px',width:'max-content',borderBottomLeftRadius:11+'px',
+       <li className=" self" style={{listStyleType:"none",overflow:'hidden',marginLeft: 2 +'px',
+            backgroundColor:"whitesmoke",margin:20 + "px",padding:13+'px',width:'max-content',borderBottomLeftRadius:11+'px',float:'right',clear:'both',
             borderBottomRightRadius:11+'px',borderTopLeftRadius:11+'px'}}>
 
-                    <div className="message text-dark">{chat.content} </div>
-            </li>
+                <div className="message text-dark" >{chat.content} </div>
+        </li>
             
           ):(
-           
-            <li className="other" style={{listStyleType:"none",overflow:'hidden',float:'left',marginLeft: 2 +'px',
-            backgroundColor:"blanchedalmond",margin:2 + "em",padding:13+'px',width:'max-content',borderBottomLeftRadius:11+'px',
+                <li className="other" style={{listStyleType:"none",overflow:'hidden',marginLeft: 2 +'px',float:'left',clear:'both',
+            backgroundColor:"blanchedalmond",margin:20 + "px",padding:13+'px',width:'max-content',borderBottomLeftRadius:11+'px',
             borderBottomRightRadius:11+'px',borderTopRightRadius:11+'px'}}>
           
-                     <div className="message text-dark">{chat.content}</div>
+                 <div className="message text-dark" >{chat.content}</div>
             
             </li>
             
           )}
         </div>
         ))}
-        </div>
+        
         <p style={{ float:"left", clear: "both",position:'sticky',bottom:0 }} ref={(el) => { this.messagesEnd = el; }}>
         </p>
 

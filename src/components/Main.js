@@ -146,27 +146,27 @@ class Main extends Component{
                 
             <div className="card mt-4 bg-light" style={{borderRadius:0}}>
                 <Windowh/>
-                <div className="card-body">
-                <div className="container">
-                        <div className="row">
-                            <div className="col">
-                        <div className="card text-white" style={{height:35 +'rem',backgroundColor:'black',overflowY:'auto',display:'flex'}}>
+                <div className="card-footer"><strong className="text-center">{this.state.user.email}</strong></div>
+                <div className="card-body"> 
+                <div className="card text-white" style={{height:31 +'rem',backgroundColor:'black',overflowY:'auto'}}>
                         <Chat />
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>  <form onSubmit={this.handleSubmit}>
-            <input  className="form-control" placeholder="Enter your Text" style={{marginBottom :0 + 'px',marginTop:32 +'rem',marginLeft:10 + 'px',marginRight:20 + "px" , width: 93 +'%',bottom:3,position:'absolute'}}
-              onChange={this.handleChange}
-              value={this.state.content}
-            />
-            <button className=" btn btn-md btn-success" style={{marginTop:10 +'px',position:'absolute',right:3,bottom:3}}>Send
-            </button>
-          </form>
-                <strong className="text-center">{this.state.user.email}</strong>
+                </div>
+               
+                </div>
+                <div className="card">  
+                <form onSubmit={this.handleSubmit}>
+                  <input  className="form-control" placeholder="Enter your text here ..." style={{float:'inline-start',width:90+'%',margin:10+'px',border:'black'}}
+                  onChange={this.handleChange}
+                  value={this.state.content}
+                  />
+                <button className=" btn btn-md btn-success" style={{float:'inline-end',margin:10+'px',marginInlineEnd:17 + 'px'}}>Send </button>
+
+                  </form>
+                   </div>
+                   </div>
+                
                     
-            </div>
+            
         </div>
     </div>
         )
@@ -174,3 +174,4 @@ class Main extends Component{
 }
 
 export default Main
+
